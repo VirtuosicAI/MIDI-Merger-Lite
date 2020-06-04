@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -276,6 +277,13 @@ namespace MIDI_Merger_Lite
                         {
                             using (FileStream headerStream = new FileStream(midiList.ElementAt(0), FileMode.Open))
                             {
+                                MethodInvoker displayCurrentMIDI = delegate
+                                {
+                                    string currentMIDIName = MIDIListView.Items[0].SubItems[0].Text;
+                                    this.Text = "MIDI Merger Lite | Merging '" + currentMIDIName + "' - Track 1";
+                                };
+                                this.Invoke(displayCurrentMIDI);
+
                                 byte[] header = new byte[10];
                                 headerStream.Read(header, 0, header.Length);
                                 midiWriter.Write(header);
@@ -337,6 +345,14 @@ namespace MIDI_Merger_Lite
                                             e.Cancel = true;
                                             break;
                                         }
+
+                                        MethodInvoker displayCurrentMIDI = delegate
+                                        {
+                                            string currentMIDIName = MIDIListView.Items[i].SubItems[0].Text;
+                                            this.Text = "MIDI Merger Lite | Merging '" + currentMIDIName + "' - Track " + (j + 1).ToString();
+                                        };
+                                        this.Invoke(displayCurrentMIDI);
+
                                         byte[] trackHeader = new byte[4];
                                         midiReader.Read(trackHeader, 0, trackHeader.Length);
                                         midiWriter.Write(trackHeader);
@@ -403,6 +419,14 @@ namespace MIDI_Merger_Lite
                                             e.Cancel = true;
                                             break;
                                         }
+
+                                        MethodInvoker displayCurrentMIDI = delegate
+                                        {
+                                            string currentMIDIName = MIDIListView.Items[i].SubItems[0].Text;
+                                            this.Text = "MIDI Merger Lite | Merging '" + currentMIDIName + "' - Track " + (j + 1).ToString();
+                                        };
+                                        this.Invoke(displayCurrentMIDI);
+
                                         byte[] trackHeader = new byte[4];
                                         midiReader.Read(trackHeader, 0, trackHeader.Length);
                                         midiWriter.Write(trackHeader);
@@ -436,6 +460,7 @@ namespace MIDI_Merger_Lite
         {
             AllowSleep();
 
+            this.Text = "MIDI Merger Lite";
             addMIDIsToolStripMenuItem.Enabled = true;
             removeSelectedMIDIsToolStripMenuItem.Enabled = true;
             clearMIDIsToolStripMenuItem.Enabled = true;
