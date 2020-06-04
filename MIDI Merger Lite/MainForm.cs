@@ -449,6 +449,7 @@ namespace MIDI_Merger_Lite
 
             midiList.Clear();
             trackCount.Clear();
+            GC.Collect();
 
             if (BGWorkerExMessage != "")
             {
