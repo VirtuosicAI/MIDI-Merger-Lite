@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using MIDI_Merger_Lite.Properties;
+using Microsoft.WindowsAPICodePack.Taskbar;
 
 namespace MIDI_Merger_Lite
 {
@@ -227,6 +228,8 @@ namespace MIDI_Merger_Lite
                     midiList.Add(midiFile.SubItems[1].Text);
                     trackCount.Add(Convert.ToUInt16(midiFile.SubItems[2].Text));
                 }
+
+                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
 
                 backgroundWorker.RunWorkerAsync();
 
@@ -472,22 +475,22 @@ namespace MIDI_Merger_Lite
             trackCount.Clear();
             GC.Collect();
 
+            progressBar.Value = 0;
+            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
+
             if (BGWorkerExMessage != "")
             {
-                progressBar.Value = 0;
                 MessageBox.Show(this, "Error: " + BGWorkerExMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 BGWorkerExMessage = "";
                 File.Delete(exportPathTXTBox.Text);
             }
             else if (e.Cancelled)
             {
-                progressBar.Value = 0;
                 MessageBox.Show(this, "Merging aborted.", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 File.Delete(exportPathTXTBox.Text);
             }
             else
             {
-                progressBar.Value = 0;
                 MessageBox.Show(this, "Successfully merged all MIDIs.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -501,6 +504,7 @@ namespace MIDI_Merger_Lite
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar.Value = e.ProgressPercentage;
+            TaskbarManager.Instance.SetProgressValue(e.ProgressPercentage, 100);
         }
 
         private void abortMergingToolStripMenuItem_Click(object sender, EventArgs e)
