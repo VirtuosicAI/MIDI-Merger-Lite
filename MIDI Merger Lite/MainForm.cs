@@ -218,11 +218,11 @@ namespace MIDI_Merger_Lite
             {
                 if (File.Exists(exportPathTXTBox.Text))
                 {
-                    int counter = 1;
                     do
                     {
-                        exportPathTXTBox.Text = Path.GetDirectoryName(exportPathTXTBox.Text) + @"\" + Path.GetFileNameWithoutExtension(exportPathTXTBox.Text) + " (Copy " + counter.ToString() + ").mid";
-                        counter++;
+                        string directoryName = Path.GetDirectoryName(exportPathTXTBox.Text);
+                        string newFileName = Path.GetFileNameWithoutExtension(exportPathTXTBox.Text) + " - Copy.mid";
+                        exportPathTXTBox.Text = Path.Combine(directoryName, newFileName);
                     } while (File.Exists(exportPathTXTBox.Text));
                 }
 
