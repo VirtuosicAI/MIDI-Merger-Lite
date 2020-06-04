@@ -26,7 +26,6 @@ namespace MIDI_Merger_Lite
         public MainForm()
         {
             InitializeComponent();
-            PreventSleepAndMonitorOff();
         }
 
         // Prevent the system from entering sleep and turning off monitor.
@@ -234,6 +233,8 @@ namespace MIDI_Merger_Lite
 
                 backgroundWorker.RunWorkerAsync();
 
+                PreventSleepAndMonitorOff();
+
                 addMIDIsToolStripMenuItem.Enabled = false;
                 removeSelectedMIDIsToolStripMenuItem.Enabled = false;
                 clearMIDIsToolStripMenuItem.Enabled = false;
@@ -433,6 +434,8 @@ namespace MIDI_Merger_Lite
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            AllowSleep();
+
             addMIDIsToolStripMenuItem.Enabled = true;
             removeSelectedMIDIsToolStripMenuItem.Enabled = true;
             clearMIDIsToolStripMenuItem.Enabled = true;
