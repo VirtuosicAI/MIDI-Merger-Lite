@@ -442,6 +442,9 @@ namespace MIDI_Merger_Lite
             exportButton.Enabled = true;
             totalTracksUpdater.Start();
 
+            midiList.Clear();
+            trackCount.Clear();
+
             if (BGWorkerExMessage != "")
             {
                 progressBar.Value = 0;
@@ -457,8 +460,6 @@ namespace MIDI_Merger_Lite
             }
             else
             {
-                midiList.Clear();
-                trackCount.Clear();
                 progressBar.Value = 0;
                 MessageBox.Show(this, "Successfully merged all MIDIs.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
