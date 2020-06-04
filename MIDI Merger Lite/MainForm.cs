@@ -158,8 +158,8 @@ namespace MIDI_Merger_Lite
                         }
                     }                    
                 }
-                totalTrackNumWithoutFirstTrack = totalTrackNum - MIDIListView.Items.Count;
-                totalTrackNumWithoutFirstTrack++;
+
+                totalTrackNumWithoutFirstTrack = totalTrackNum - MIDIListView.Items.Count + 1;
                 trackTotalLabel.Text = "Total number of tracks: " + totalTrackNum.ToString() + " (" + totalTrackNumWithoutFirstTrack.ToString() + " without 1st track on non-primary MIDIs)";
             }
         }
@@ -172,14 +172,16 @@ namespace MIDI_Merger_Lite
                 {
                     MIDIListView.Items.Remove(sItem);
                 }
+
                 ushort tempShort = 0;
+
                 for (int i = 0; i < MIDIListView.Items.Count; i++)
                 {
                     tempShort += Convert.ToUInt16(MIDIListView.Items[i].SubItems[2].Text.ToString());
                 }
+
                 totalTrackNum = tempShort;
-                totalTrackNumWithoutFirstTrack = totalTrackNum - MIDIListView.Items.Count;
-                totalTrackNumWithoutFirstTrack++;
+                totalTrackNumWithoutFirstTrack = totalTrackNum - MIDIListView.Items.Count + 1;
                 trackTotalLabel.Text = "Total number of tracks: " + totalTrackNum.ToString() + " (" + totalTrackNumWithoutFirstTrack.ToString() + " without 1st track on non-primary MIDIs)";
             }
         }
@@ -590,8 +592,8 @@ namespace MIDI_Merger_Lite
                     }
                 }
             }
-            totalTrackNumWithoutFirstTrack = totalTrackNum - MIDIListView.Items.Count;
-            totalTrackNumWithoutFirstTrack++;
+
+            totalTrackNumWithoutFirstTrack = totalTrackNum - MIDIListView.Items.Count + 1;
             trackTotalLabel.Text = "Total number of tracks: " + totalTrackNum.ToString() + " (" + totalTrackNumWithoutFirstTrack.ToString() + " without 1st track on non-primary MIDIs)";
         }
 
