@@ -34,4 +34,4 @@ References
 
 To learn more about the MIDI 1.0 specification, visit the links below:
 - MIDI File Format Specifications: https://github.com/colxi/midi-parser-js/wiki/MIDI-File-Format-Specifications
-- The MIDI File Format: https://www.csie.ntu.edu.tw/~r92092/ref/midi/
+- The MIDI File Format: http://www.personal.kent.edu/~sbirch/Music_Production/MP-II/MIDI/midi_file_format.htm
