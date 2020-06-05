@@ -1,5 +1,7 @@
 # MIDI Merger Lite
 
+![Program Screenshot](program_screenshot.png)
+
 Overview
 ------------
 
